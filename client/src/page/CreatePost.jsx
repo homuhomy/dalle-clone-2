@@ -28,7 +28,7 @@ const CreatePost = () => {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(form)
-                })
+                });
 
                 await response.json();
                 navigate('/');
@@ -54,7 +54,6 @@ const CreatePost = () => {
     const handleSurpriseMe = () =>{
         const randomPrompt = getRandomPrompt(form.prompt);
         setForm({...form, prompt: randomPrompt})
-
     }
 
     const generateImage = async () => {
@@ -68,10 +67,8 @@ const CreatePost = () => {
                     },
                     body: JSON.stringify({prompt: form.prompt}),
                 })
-
                 const data = await response.json();
-
-                setForm(({ ...form, photo: `data:image/jpeg;base64, ${data.photo}`}))
+                setForm(({...form, photo: `data:image/jpeg;base64,${data.photo}`}))
             } catch (error){
                 alert(error)
             } finally {
@@ -89,7 +86,7 @@ const CreatePost = () => {
                 <p className="mt-2 text-[#666e75] text-[18px] max-w-[500px]">Create images through DALL-E AI and share them with the community</p>
             </div>
 
-            <form className="mt-16 max-w-3xl" onSubmit="handleSubmit">
+            <form className="mt-16 max-w-3xl" onSubmit={handleSubmit}>
                 <div className="flex flex-col gap-5">
                     <FormField
                         labelName="Your name"
